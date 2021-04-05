@@ -20,6 +20,7 @@ import { CarDetailComponent } from './components/cars/car-detail/car-detail.comp
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
+import { ListComponent } from './components/list/list.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { VatAddedPipe } from './pipes/vat-added.pipe';
     CarDetailComponent,
     FilterBrandPipe,
     FilterColorPipe,
-    VatAddedPipe
+    VatAddedPipe,
+    ListComponent
   ],
   imports: [
     BrowserModule,
