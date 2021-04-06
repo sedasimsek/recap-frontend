@@ -1,1 +1,97 @@
-<p>payment works!</p>
+<div class="card mt-4">
+    <div class="card-body">
+      <table class="table">
+        
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Color</th>
+            <th>Model Year</th>
+            <th>Rent Date</th>
+            <th>Return Date</th>
+            <th>Daily Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="car!=undefined" >
+            <td>{{car.brandName}}</td>
+            <td>{{car.colorName}}</td>
+            <td>{{car.modelYear}}</td>
+            <td>{{rental.rentDate}}</td>
+            <td>{{rental.returnDate}}</td>
+            <td>{{car.dailyPrice | vatAdded:8 |currency}}</td>
+            <td><strong class="text-danger">{{amount | currency}}</strong></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+  
+  <div class="card mt-4">
+    
+    <div class="card-body">
+
+      <img src="{{imageURL}}/uploads/credit-card.png" alt="No IMG" style="width: 240px;">
+
+      <div class="row">
+        
+        <div class="inputbox mt-3">
+          <span>Name on the card</span>
+          <input
+            type="text"
+            class="form-control"
+            required="required"
+          />
+        </div>
+
+          <div class="col-md-8">
+            <div class="inputbox mt-3 mr-2">
+              <span>Card Number</span>
+              <input
+                type="text"
+                class="form-control"
+                required="required"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+              <div class="inputbox mt-3 mr-2">
+                <span>Expiration Date</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  required="required"
+                />
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+            <div class="inputbox mt-3 mr-2">
+              <span>Security Code</span>
+              <input
+                type="text"
+                class="form-control"
+                required="required"
+              />
+            </div>
+            </div>
+        
+      </div>
+      
+    </div>
+    <div class="card-footer">
+      <div class="row">
+          <button (click)="payment()" class="btn btn-success">      
+            <img  src="{{imageURL}}/uploads/yellowCard.png" alt="No IMG" style="width: 40px;">
+            <img  src="{{imageURL}}/uploads/redCard.png" alt="No IMG" style="width: 40px;">
+            <img  src="{{imageURL}}/uploads/blueCard.png" alt="No IMG" style="width: 40px;">
+            <strong>{{ amount | currency }}  PAY </strong>
+          </button>
+      </div>
+  </div>
+  </div>

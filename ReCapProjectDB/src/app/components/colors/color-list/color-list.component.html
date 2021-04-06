@@ -1,0 +1,18 @@
+<div *ngIf="!colors" class="alert alert-info w-100" role="alert">
+    Not exist colors
+  </div>
+  
+  <table *ngIf="colors" class="table table-striped m-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <th scope="row">{{color.colorId}}</th>
+          <td>{{color.colorName}}</td>
+        </tr>
+      </tbody>
+    </table>

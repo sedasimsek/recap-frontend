@@ -1,1 +1,25 @@
-<p>color-update works!</p>
+<div class="content m-4" style="border-radius: 18px; color: rgb(142, 214, 142); border-color: rgb(156, 197, 84);">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-header">
+                <h5 class="title">Update Color</h5>
+            </div>
+
+            <div class="card-body">
+
+                <form [formGroup]="colorUpdateForm">
+                    <div class="mb-3">
+                        <label for="colorNameInput" class="form-label">Color</label>
+                        <input type="text" class="form-control" id="colorNameInput" formControlName="name" />
+                    </div>
+                </form>
+
+                <button class="btn btn-outline-success float-end" type="button" (click)="update()">
+                    UPDATE
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>

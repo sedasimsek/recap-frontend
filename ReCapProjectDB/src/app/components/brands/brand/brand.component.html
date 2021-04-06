@@ -1,7 +1,41 @@
-<ul class="list-group">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-info m-4"
+  role="status"
+></div>
+
+<div class="m-3">
+  <label for="exampleFormControlInput1" class="form-label" style="color:rgb(9, 7, 141);">Search via Brand</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" style="border-radius: 10px; border-color: rgb(74, 141, 7);" placeholder="brand...">
+</div>
+
+<div *ngIf="filterText.length>2" class="alert-warning m-2">
+  {{filterText}} searching...
+</div>
+
+<ul *ngIf="dataLoaded == true" 
+    class="list-group list-group-flush m-4">
+    
+    <h4 class="ps-2"
+    style="background-color: lightblue; border-radius: 10px; height: 28px;">
+    Brands
+</h4>
+
+  <li
+    (click)="setCurrentBrand(brand)"
+    routerLink = "/cars/brand/{{brand.brandId}}"
+    *ngFor="let brand of brands | filterBrand:filterText"
+    [class]="getBrandClass(brand)"
+  >
+    {{ brand.brandName }}
+  </li>
+
+  <button
+    routerLink="/cars"
+    (click)="clearFilter()"
+    type="button"
+    aria-current="true"
+    class="btn btn-info"
+  >
+    Clear Filter
+  </button>

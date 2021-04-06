@@ -21,6 +21,11 @@ import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { ListComponent } from './components/list/list.component';
+import { BrandListComponent } from './components/brands/brand-list/brand-list.component';
+import { ColorListComponent } from './components/colors/color-list/color-list.component';
+import { RentalListComponent } from './components/rentals/rental-list/rental-list.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 @NgModule({
@@ -39,7 +44,12 @@ import { ListComponent } from './components/list/list.component';
     FilterBrandPipe,
     FilterColorPipe,
     VatAddedPipe,
-    ListComponent
+    ListComponent,
+    BrandListComponent,
+    ColorListComponent,
+    RentalListComponent,
+    HomepageComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +62,7 @@ import { ListComponent } from './components/list/list.component';
       positionClass:"toast-bottom-right"
     })
   ],
-  providers: [
-    //{provide:HTTP_INTERCEPTORS,import { FormsModule, ReactiveFormsModule } from '@angular/forms'; multi:true}
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

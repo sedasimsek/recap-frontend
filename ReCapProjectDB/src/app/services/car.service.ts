@@ -13,47 +13,47 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CarService {
 
-  apiURL = environment.apiUrl;
+  apiUrl = environment.apiUrl;
 
   constructor(private httpClient:HttpClient) { }
 
   getCars():Observable<ListResponseModel<Car>>{
-    let newPath= this.apiURL+"cars/getcardetails";
+    let newPath= this.apiUrl+"cars/getcardetails";
     return this.httpClient
     .get<ListResponseModel<Car>>(newPath);
   }
 
-  getCarsByBrand(brandid:number):Observable<ListResponseModel<Car>>{
-    let newPath=this.apiURL+"cars/getbybrand?brandid="+brandid;
+  getCarsByBrand(brandId:number):Observable<ListResponseModel<Car>>{
+    let newPath=this.apiUrl+"cars/getbybrand?brandid="+brandId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
-  getCarsByColor(colorid:number):Observable<ListResponseModel<Car>>{
-    let newPath = this.apiURL+"cars/getbycolor?colorid="+colorid;
+  getCarsByColor(colorId:number):Observable<ListResponseModel<Car>>{
+    let newPath = this.apiUrl+"cars/getbycolor?colorid="+colorId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarDetail(carId:number):Observable<ItemResponseModel<Car>>{
-    let newPath = this.apiURL + 'cars/getcardetailbyid?id='+carId;
+    let newPath = this.apiUrl + 'cars/getcardetailbyid?id='+carId;
     return this.httpClient.get<ItemResponseModel<Car>>(newPath)
   }
 
   getCarsByBrandAndColor(brandId:number,colorId:number):Observable<ListResponseModel<Car>>{
-    let newPath = this.apiURL +'cars/getcarsbybrandandcolor?brandId='+brandId+'&colorId='+colorId;
+    let newPath = this.apiUrl +'cars/getcarsbybrandandcolor?brandId='+brandId+'&colorId='+colorId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   add(car:Car):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiURL+"cars/add",car);
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/add",car);
   }
 
   update(car:Car):Observable<ResponseModel>{
     console.log(car);
-    return this.httpClient.post<ResponseModel>(this.apiURL+"cars/update",car);
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/update",car);
   }
 
   delete(car:CarDelete):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiURL+"cars/delete",car);
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/delete",car);
   }
 
 }
