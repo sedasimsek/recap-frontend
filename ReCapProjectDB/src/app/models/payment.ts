@@ -1,3 +1,7 @@
 export interface Payment{
-    amount:number;
+    id?:number;
+    userId:number;
+    carId?:number;
+    processDate?:Date;
+    totalAmount:number;
 }

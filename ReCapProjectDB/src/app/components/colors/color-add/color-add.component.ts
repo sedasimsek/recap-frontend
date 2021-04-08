@@ -14,7 +14,7 @@ export class ColorAddComponent implements OnInit {
   colorAddForm!: FormGroup;
   constructor(private formBuilder: FormBuilder,
     private colorService: ColorService,
-    private toastr: ToastrService,
+    private toastrService: ToastrService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class ColorAddComponent implements OnInit {
 
   createColorAddForm() {
     this.colorAddForm = this.formBuilder.group({
-      name: ["", Validators.required]
+      colorName: ["", Validators.required]
     })
   }
 
@@ -31,19 +31,14 @@ export class ColorAddComponent implements OnInit {
     if (this.colorAddForm.valid) {
       let colorModel = Object.assign({}, this.colorAddForm.value)
       this.colorService.add(colorModel).subscribe(response => {
-        this.toastr.success("Add OK")
-        this.router.navigate(['/list']);
+        this.toastrService.success(response.message,"Başarılı")
+        //this.router.navigate(['/list']);
       }, responseError => {
-        console.log(responseError.error.ValidationErrors)
-        if (responseError.error.ValidationErrors.length > 0) {
-          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-            this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
-          }
-        }
+        console.log(responseError.error)
       })
     }
     else {
-      this.toastr.error("Form Error")
+      this.toastrService.error("Form Eksik","Dikkat")
     }
   }
 }

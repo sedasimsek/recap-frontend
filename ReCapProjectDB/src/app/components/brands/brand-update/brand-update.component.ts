@@ -12,8 +12,8 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandUpdateComponent implements OnInit {
 
-  brandUpdateForm!: FormGroup;
-  brand!: Brand;
+  // brandUpdateForm!: FormGroup;
+  // brand!: Brand;
 
   constructor(private formBuilder:FormBuilder,
     private brandService:BrandService,
@@ -22,43 +22,43 @@ export class BrandUpdateComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
-    this.createBrandUpdateForm();
-    this.activatedRoute.params.subscribe((parameter) => {
-      if (parameter['brandId']) {
-        this.getBrandById(parameter['brandId']);
-      }
-    });
+    // this.createBrandUpdateForm();
+    // this.activatedRoute.params.subscribe((parameter) => {
+    //   if (parameter['brandId']) {
+    //     this.getBrandById(parameter['brandId']);
+    //   }
+    // });
   }
 
-  getBrandById(id: number) {
-    this.brandService.getBrandById(id).subscribe((response) => {
-        this.brand = response.data;
-        this.brandUpdateForm.setValue({
-          name:this.brand.brandName
-        })
-      }
-    );
-  }
+  // getBrandById(id: number) {
+  //   this.brandService.getBrandById(id).subscribe((response) => {
+  //       this.brand = response.data;
+  //       this.brandUpdateForm.setValue({
+  //         name:this.brand.brandName
+  //       })
+  //     }
+  //   );
+  // }
 
-  createBrandUpdateForm() {
-    this.brandUpdateForm = this.formBuilder.group({
-      brandName: ['', Validators.required],
-    });
-  }
+  // createBrandUpdateForm() {
+  //   this.brandUpdateForm = this.formBuilder.group({
+  //     brandName: ['', Validators.required],
+  //   });
+  // }
 
-  update() {
-    if (this.brandUpdateForm.valid) {
-      let brand: Brand = this.brandUpdateForm.value;
-      brand.brandId = this.brand.brandId;
-      this.brandService.update(brand).subscribe((response) => {
-          this.toastr.success("Update OK");
-          this.router.navigate(['/list']);
-        },responseError=>{
-          this.toastr.error(responseError.error)
-        });
-    }else{
-      this.toastr.warning('Update ERROR');
-    }
-  }
+  // update() {
+  //   if (this.brandUpdateForm.valid) {
+  //     let brand: Brand = this.brandUpdateForm.value;
+  //     brand.brandId = this.brand.brandId;
+  //     this.brandService.update(brand).subscribe((response) => {
+  //         this.toastr.success("Update OK");
+  //         this.router.navigate(['/list']);
+  //       },responseError=>{
+  //         this.toastr.error(responseError.error)
+  //       });
+  //   }else{
+  //     this.toastr.warning('Update ERROR');
+  //   }
+  // }
 
 }

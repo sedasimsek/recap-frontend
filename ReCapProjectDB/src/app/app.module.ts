@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,9 +24,15 @@ import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { ListComponent } from './components/list/list.component';
 import { BrandListComponent } from './components/brands/brand-list/brand-list.component';
 import { ColorListComponent } from './components/colors/color-list/color-list.component';
-import { RentalListComponent } from './components/rentals/rental-list/rental-list.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AccountComponent } from './components/account/account.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './components/login/login.component';
+import { CarFilterComponent } from './components/cars/car-filter/car-filter.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { CarRentComponent } from './components/cars/car-rent/car-rent.component';
+import { DescriptionPipe } from './pipes/description.pipe';
 
 
 @NgModule({
@@ -45,24 +52,43 @@ import { AccountComponent } from './components/account/account.component';
     FilterColorPipe,
     VatAddedPipe,
     ListComponent,
+    FooterComponent,
+    LoginComponent,
     BrandListComponent,
     ColorListComponent,
-    RentalListComponent,
     HomepageComponent,
-    AccountComponent
+    AccountComponent,
+    CarFilterComponent,
+    CarRentComponent,
+    DescriptionPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
-    })
+    }),
+    FontAwesomeModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: tokenGetter,
+      }
+    }),
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}

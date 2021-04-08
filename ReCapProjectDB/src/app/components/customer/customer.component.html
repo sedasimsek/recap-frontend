@@ -1,1 +1,19 @@
-<p>customer works!</p>
+<div style="text-align: center" aria-current="true">
+  <h4>Müşteriler listeleniyor</h4>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Müşteri Id</th>
+      <th>Müşteri Adı</th>
+      <th>Müşteri Email</th>
+      <th>Müşteri Şirket</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let customer of customers">
+    <td>{{ customer.userId }}</td>
+    <td>{{ customer.firstName }} {{ customer.lastName }}</td>
+    <td>{{ customer.email }}</td>
+    <td>{{ customer.companyName }}</td>
+  </tr>
+</table>

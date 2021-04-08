@@ -11,70 +11,66 @@ import { ColorService } from 'src/app/services/color.service';
 @Component({
   selector: 'app-car-add',
   templateUrl: './car-add.component.html',
-  styleUrls: ['./car-add.component.css']
+  styleUrls: ['./car-add.component.css'],
 })
 export class CarAddComponent implements OnInit {
-
   carAddForm!: FormGroup;
-
   brands!: Brand[];
   colors!: Color[];
 
-
   constructor(
-    private formBuilder:FormBuilder,
-    private carService:CarService,
-    private brandService:BrandService,
-    private colorService:ColorService,
-    private toastr: ToastrService,
-    private router:Router) { }
+    private formBuilder: FormBuilder,
+    private carService: CarService,
+    private brandService: BrandService,
+    private colorService: ColorService,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.createCarAddForm()
+    this.createCarAddForm();
     this.getBrands();
     this.getColors();
   }
 
-
-  createCarAddForm(){
+  createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
-      brandId: ["", Validators.required],
-      colorId: ["", Validators.required],
-      modelYear: ["", Validators.required],
-      dailyPrice: ["", Validators.required],
-      description: ["", Validators.required],
-      minFindexScore:["",Validators.required]
-    })
+      brandId: ['', Validators.required],
+      colorId: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      dailyPrice: ['', Validators.required],
+      description: ['', Validators.required],
+      minFindexScore: ['', Validators.required],
+    });
   }
 
-  getBrands(){
-    this.brandService.getBrands().subscribe(response => {
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-    })
+    });
   }
 
   getColors() {
-    this.colorService.getColors().subscribe(response => {
-       this.colors = response.data;
-    })
+    this.colorService.getColors().subscribe((response) => {
+      this.colors = response.data;
+    });
   }
 
-  add(){
-    if(this.carAddForm.valid){      
-      let carModel = Object.assign({},this.carAddForm.value)
-      console.log(carModel)
-      this.carService.add(carModel).subscribe(response=>{
-        this.toastr.success("OK")
-        this.router.navigate(['/list']);
-      },responseError=>{
-        if(responseError.error.ValidationErrors.length>0){
-          for (let i = 0; i < responseError.error.ValidationErrors.length ; i++) {
-            this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
-          }
+  add() {
+    if (this.carAddForm.valid) {
+      let carModel = Object.assign({}, this.carAddForm.value);
+      //console.log(carModel);
+      this.carService.add(carModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          //this.router.navigate(['/list']);
+        },
+        (responseError) => {
+          console.log(responseError.error);
         }
-      })
-    }else{
-      this.toastr.error('ERROR')
+      );
+    } else {
+      this.toastrService.error('Form eksik', 'Dikkat');
     }
   }
 }

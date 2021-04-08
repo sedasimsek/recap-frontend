@@ -5,52 +5,39 @@ import { ColorService } from 'src/app/services/color.service';
 @Component({
   selector: 'app-color',
   templateUrl: './color.component.html',
-  styleUrls: ['./color.component.css']
+  styleUrls: ['./color.component.css'],
 })
 export class ColorComponent implements OnInit {
-
-  colors:Color[] = [];
+  colors: Color[] = [];
   currentColor!: Color;
-  dataLoaded = false;
-  filterText="";
+  filterText = '';
 
-  constructor(private colorService:ColorService) { }
+  constructor(private colorService: ColorService) {}
 
   ngOnInit(): void {
     this.getColors();
   }
-  
+
   getColors() {
-    this.colorService.getColors().subscribe(response => {
-       this.colors = response.data,
-       this.dataLoaded = true;
-    })
+    this.colorService.getColors().subscribe((response) => {
+      this.colors = response.data;
+    });
   }
-  
-  getAllColorClass() {
-    if (!this.currentColor) {
-      return 'list-group-item active cursorPointer';
+
+  setCurrentColor(color: Color) {
+    this.currentColor = color;
+  }
+
+  getCurrentColorClass(color: Color) {
+    if (color == this.currentColor) {
+      return 'list-group-item active';
     } else {
-      return 'list-group-item cursorPointer';
+      return 'list-group-item';
     }
   }
 
-  setCurrentColor(color:Color){
-    this.currentColor=color;
-  }
-
-  getColorClass(color:Color){
-    if(color == this.currentColor){
-      return "list-group-item active cursorPointer"
-    }else{
-      return "list-group-item cursorPointer"
-    }
-  }
-
-  clearFilter() {
-    this.filterText = "";
-    this.getColors();
-  }
-
-
+  // clearFilter() {
+  //   this.filterText = '';
+  //   this.getColors();
+  // }
 }

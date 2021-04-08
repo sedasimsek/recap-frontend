@@ -1,42 +1,29 @@
-<div
-  *ngIf="dataLoaded == false"
-  class="spinner-border text-info m-2"
-  role="status"
-></div>
-
-<div class="m-3">
-  <label for="exampleFormControlInput1" class="form-label" style="color:rgb(9, 7, 141);">Search via Color</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" style="border-radius: 10px; border-color: rgb(9, 7, 141);" placeholder="color...">
-</div>
-<div *ngIf="filterText.length>2" class="alert-warning m-2">
-  {{filterText}} searching
-</div>
-
-<ul 
-  *ngIf="dataLoaded == true" 
-  class="list-group list-group-flush m-4">
-  
-<h4 class="ps-2"
-  style="background-color: lightblue; border-radius: 10px; height: 28px;">
-  Colors
-</h4> 
-  
-<li
+<ul class="list-group">
+  <li class="list-group-item" routerLink="cars"><h6>Tüm Renkler</h6></li>
+  <div class="mb-3">
+    <input
+      type="text"
+      [(ngModel)]="filterText"
+      class="form-control"
+      id="filterText"
+      placeholder="Renk ara.."
+    />
+  </div>
+</ul>
+<select
+  class="form-select"
+  size="5"
+  aria-label="size 3 select example"
+  style="background-color: yellowgreen"
+>
+  <option
+    style="background-color: rgb(252, 251, 245)"
     (click)="setCurrentColor(color)"
-    routerLink = "/cars/color/{{color.colorId}}"
-    *ngFor="let color of colors | filterColor:filterText"
-    [class]="getColorClass(color)"
+    routerLink="cars/colors/{{ color.colorId }}"
+    [class]="getCurrentColorClass(color)"
+    *ngFor="let color of colors | filterColor: filterText"
+    value="1"
   >
     {{ color.colorName }}
-  </li>
-  
-  <button
-  routerLink="/cars"
-  (click)="clearFilter()"
-  type="button"
-  aria-current="true"
-  class="btn btn-info"
->
-  Clear Filter
-</button>
-</ul>
+  </option>
+</select>

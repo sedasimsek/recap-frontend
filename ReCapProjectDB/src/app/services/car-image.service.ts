@@ -11,33 +11,28 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CarImageService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = "https://localhost:44304/api/"
   constructor(private httpClient:HttpClient) { }
 
-  getCarImages():Observable<ListResponseModel<CarImage>>{
-    let newPath=this.apiUrl+"carimages/getall"
-    return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
-  }
-
-  getCarImagesByCarId(carId:number):Observable<ListResponseModel<CarImage>>{
+  getCarImagesById(carId:number):Observable<ListResponseModel<CarImage>>{
     let newPath=this.apiUrl+"carimages/getimagesbycarid?carId="+carId;
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
   }
 
-  uploadImage(image: File,carId:number):Observable<any> {
+  // uploadImage(image: File,carId:number):Observable<any> {
 
-    console.log(image.name)
-    console.log(carId)
-    const formData:FormData = new FormData();
+  //   console.log(image.name)
+  //   console.log(carId)
+  //   const formData:FormData = new FormData();
 
-    formData.append('Image', image);
-    formData.append('CarId',carId.toString());
+  //   formData.append('Image', image);
+  //   formData.append('CarId',carId.toString());
 
-    let newPath=this.apiUrl+'carImages/add';
-    return this.httpClient.post<ResponseModel>(newPath,formData,{
-      reportProgress: true,
-      responseType: 'json',
-    });
+  //   let newPath=this.apiUrl+'carImages/add';
+  //   return this.httpClient.post<ResponseModel>(newPath,formData,{
+  //     reportProgress: true,
+  //     responseType: 'json',
+  //   });
     
   }
-}
+

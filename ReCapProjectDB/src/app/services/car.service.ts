@@ -13,7 +13,7 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CarService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = "https://localhost:44304/api/";
 
   constructor(private httpClient:HttpClient) { }
 
@@ -44,16 +44,17 @@ export class CarService {
   }
 
   add(car:Car):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/add",car);
+    let newPath = this.apiUrl+"cars/add"
+    return this.httpClient.post<ResponseModel>(newPath,car);
   }
 
   update(car:Car):Observable<ResponseModel>{
-    console.log(car);
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/update",car);
+    let newPath = this.apiUrl+"cars/update"
+    return this.httpClient.post<ResponseModel>(newPath,car);
   }
 
-  delete(car:CarDelete):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/delete",car);
-  }
+  // delete(car:CarDelete):Observable<ResponseModel>{
+  //   return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/delete",car);
+  // }
 
 }

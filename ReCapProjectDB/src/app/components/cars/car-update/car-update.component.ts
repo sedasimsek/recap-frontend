@@ -1,101 +1,109 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
+import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car-update',
   templateUrl: './car-update.component.html',
-  styleUrls: ['./car-update.component.css']
+  styleUrls: ['./car-update.component.css'],
 })
 export class CarUpdateComponent implements OnInit {
-
   carUpdateForm!: FormGroup;
-  car!: Car;
-  brands:Brand[]=[];
-  colors:Color[]=[];
+  carDetails!: Car;
+  brands: Brand[] = [];
+  colors: Color[] = [];
+  brand!: Brand;
+  color!: Color;
 
-  constructor(private formBuilder:FormBuilder,
-    private brandService:BrandService,
-    private colorService:ColorService,
-    private carService:CarService,
-    private toastr: ToastrService,
+  constructor(
+    private formBuilder: FormBuilder,
+    private brandService: BrandService,
+    private colorService: ColorService,
+    private carService: CarService,
+    private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private router:Router
-    ) { }
+    private router: Router,
+    private carDetailService: CarDetailService
+  ) {}
 
   ngOnInit(): void {
-    this.createCarUpdateForm()
-    this.getBrands()
-    this.getColors()
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["id"]){
-        this.getCarDetail(params["id"])
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.getCarsById(params['id']);
       }
-    })
-  }
-  
- createCarUpdateForm(){
-    this.carUpdateForm = this.formBuilder.group({
-      brandId: ["", Validators.required],
-      colorId: ["", Validators.required],
-      modelYear: ["", Validators.required],
-      dailyPrice: ["", Validators.required],
-      description: ["", Validators.required],
-      minFindexScore:["",Validators.required]
-    })
-  }
-
-  getCarDetail(carId:number) {
-    this.carService.getCarDetail(carId).subscribe((response) => {
-      this.car = response.data;
-      this.carUpdateForm.setValue({
-        colorId: this.car.colorId,
-        brandId: this.car.brandId,
-        modelYear: this.car.modelYear,
-        dailyPrice: this.car.dailyPrice,
-        description: this.car.description,
-        minFindexScore:this.car.minFindexScore
-      })
+      this.createCarUpdateForm();
+      this.getBrands();
+      this.getColors();
     });
   }
 
-  getBrands(){
-    this.brandService.getBrands().subscribe(response =>{
-      this.brands = response.data
-    })
-  }
-
-  getColors(){
-    this.colorService.getColors().subscribe(response =>{
-      this.colors = response.data
-    })
-  }
-
-  update(){
-    if(this.carUpdateForm.valid){      
-      let carModel = Object.assign({},this.carUpdateForm.value)
-      carModel.carId = this.car.carId;
-      this.carService.update(carModel).subscribe(response=>{
-        this.toastr.success("UPDATE OK")
-        this.router.navigate(['/list']);
-      },responseError=>{
-        if(responseError.error.ValidationErrors.length>0){
-          for (let i = 0; i < responseError.error.ValidationErrors.length ; i++) {
-            this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
-          }
+  update() {
+    if (this.carUpdateForm.valid) {
+      let carModel = Object.assign({}, this.carUpdateForm.value);
+      this.carService.update(carModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          //this.router.navigate(['/list']);
+        },
+        (responseError) => {
+          console.log(responseError.error);
         }
-      })
-    }else{
-      this.toastr.error("UPDATE ERROR")
-    }    
+      );
+    } else {
+      this.toastrService.error('Form Eksik', 'Dikkat');
+    }
   }
 
+  createCarUpdateForm() {
+    this.carUpdateForm = this.formBuilder.group({
+      carId: ['', Validators.required],
+      brandId: ['', Validators.required],
+      colorId: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      dailyPrice: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
 
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
+      this.brands = response.data;
+    });
+  }
+
+  getColors() {
+    this.colorService.getColors().subscribe((response) => {
+      this.colors = response.data;
+    });
+  }
+
+  getCarsById(carId:number){
+    this.carDetailService.getCarDetailById(carId).subscribe(response=>{
+      this.carDetails=response.data[0];
+    })
+  }
+
+  default(){
+    this.carUpdateForm.patchValue({
+      carId:this.carDetails.carId,
+      brandId:this.carDetails.brandId,
+      colorId:this.carDetails.colorId,
+      modelYear:this.carDetails.modelYear,
+      dailyPrice: this.carDetails.dailyPrice,
+      description:this.carDetails.description
+    })
+  }
 }

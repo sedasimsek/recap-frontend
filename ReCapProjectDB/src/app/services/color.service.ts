@@ -12,29 +12,30 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class ColorService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = "https://localhost:44304/api/colors";
   constructor(private httpClient:HttpClient) { }
 
   getColors(): Observable<ListResponseModel<Color>>{
-    let newUrl= this.apiUrl+'colors/getall';
+    let newPath= this.apiUrl+'/getall';
     return this.httpClient
-    .get<ListResponseModel<Color>>(newUrl);
+    .get<ListResponseModel<Color>>(newPath);
   }
 
-  getColorById(id: number): Observable<ItemResponseModel<Color>> {
-    let newUrl = this.apiUrl+'colors/getbyid?id='+id
-    return this.httpClient.get<ItemResponseModel<Color>>(newUrl);
-  }
+  // getColorById(id: number): Observable<ItemResponseModel<Color>> {
+  //   let newUrl = this.apiUrl+'colors/getbyid?id='+id
+  //   return this.httpClient.get<ItemResponseModel<Color>>(newUrl);
+  // }
 
   add(color:Color):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"colors/add",color);
+    let newPath = this.apiUrl+"/add"
+    return this.httpClient.post<ResponseModel>(newPath,color)
   }
 
-  update(color:Color):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"colors/update",color);
-  }
+  // update(color:Color):Observable<ResponseModel>{
+  //   return this.httpClient.post<ResponseModel>(this.apiUrl+"colors/update",color);
+  // }
 
-  delete(color:Color):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"colors/delete",color);
-  }
+  // delete(color:Color):Observable<ResponseModel>{
+  //   return this.httpClient.post<ResponseModel>(this.apiUrl+"colors/delete",color);
+  // }
 }

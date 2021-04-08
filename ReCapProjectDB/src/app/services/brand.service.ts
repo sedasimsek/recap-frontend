@@ -12,33 +12,20 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class BrandService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl="https://localhost:44304/api/brands";
   
   constructor(private httpClient:HttpClient) { }
 
   getBrands():Observable<ListResponseModel<Brand>>{
-    let newUrl = this.apiUrl+'brands/getall';
+    let newPath = this.apiUrl+'/getall';
     return this.httpClient
-    .get<ListResponseModel<Brand>>(newUrl);
+    .get<ListResponseModel<Brand>>(newPath);
   }
 
-  getBrandById(brandId: number): Observable<ItemResponseModel<Brand>> {
-    let newUrl = this.apiUrl+'brands/getbyid?id='+brandId;
-    return this.httpClient.get<ItemResponseModel<Brand>>(newUrl);
-  }
 
   add(brand:Brand):Observable<ResponseModel>{
-    let newUrl = this.apiUrl+"brands/add";
-    return this.httpClient.post<ResponseModel>(newUrl,brand);
+    let newPath = this.apiUrl+"/add";
+    return this.httpClient.post<ResponseModel>(newPath,brand);
   }
 
-  update(brand:Brand):Observable<ResponseModel>{
-    let newUrl= this.apiUrl+"brands/update";
-    return this.httpClient.post<ResponseModel>(newUrl,brand);
-  }
-
-  delete(brand:Brand):Observable<ResponseModel>{
-    let newUrl= this.apiUrl+"brands/delete";
-    return this.httpClient.post<ResponseModel>(newUrl,brand);
-  }
 }

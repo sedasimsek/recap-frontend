@@ -15,125 +15,125 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  cars: Car[]=[];
-  currentCar!: Car;
+  // cars: Car[]=[];
+  // currentCar!: Car;
 
-  brands: Brand[]=[];
-  currentBrand!: Brand;
+  // brands: Brand[]=[];
+  // currentBrand!: Brand;
 
-  colors: Color[]=[];
-  currentColor!: Color;
+  // colors: Color[]=[];
+  // currentColor!: Color;
 
-  constructor(
-    private carService: CarService,
-    private brandService: BrandService,
-    private colorService: ColorService,
-    private toastr: ToastrService,
-    private router: Router
+   constructor(
+  //   private carService: CarService,
+  //   private brandService: BrandService,
+  //   private colorService: ColorService,
+  //   private toastr: ToastrService,
+  //   private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getCars();
-    this.getBrands();
-    this.getColors();
+  //   this.getCars();
+  //   this.getBrands();
+  //   this.getColors();
   }
 
-  getCars() {
-    this.carService.getCars().subscribe((response) => {
-      this.cars = response.data;
-    });
-  }
+  // getCars() {
+  //   this.carService.getCars().subscribe((response) => {
+  //     this.cars = response.data;
+  //   });
+  // }
 
-  getCarClass(car: Car) {
-    if (car == this.currentCar) {
-      return 'table-info cursorPointer';
-    } else {
-      return 'cursorPointer';
-    }
-  }
+  // getCarClass(car: Car) {
+  //   if (car == this.currentCar) {
+  //     return 'table-info cursorPointer';
+  //   } else {
+  //     return 'cursorPointer';
+  //   }
+  // }
 
-  setCurrentCar(car: Car) {
-    this.currentCar = car;
-  }
+  // setCurrentCar(car: Car) {
+  //   this.currentCar = car;
+  // }
 
-  getBrands() {
-    this.brandService.getBrands().subscribe((response) => {
-      this.brands = response.data;
-    });
-  }
+  // getBrands() {
+  //   this.brandService.getBrands().subscribe((response) => {
+  //     this.brands = response.data;
+  //   });
+  // }
 
-  getBrandClass(brand: Brand) {
-    if (brand == this.currentBrand) {
-      return 'list-group-item cursorPointer active';
-    } else {
-      return 'list-group-item cursorPointer ';
-    }
-  }
+  // getBrandClass(brand: Brand) {
+  //   if (brand == this.currentBrand) {
+  //     return 'list-group-item cursorPointer active';
+  //   } else {
+  //     return 'list-group-item cursorPointer ';
+  //   }
+  // }
 
-  setCurrentBrand(brand: Brand) {
-    this.currentBrand = brand;
-  }
+  // setCurrentBrand(brand: Brand) {
+  //   this.currentBrand = brand;
+  // }
 
-  getColors() {
-    this.colorService.getColors().subscribe((response) => {
-      this.colors = response.data;
-    });
-  }
+  // getColors() {
+  //   this.colorService.getColors().subscribe((response) => {
+  //     this.colors = response.data;
+  //   });
+  // }
 
-  getColorClass(color: Color) {
-    if (color == this.currentColor) {
-      return 'list-group-item cursorPointer active';
-    } else {
-      return 'list-group-item cursorPointer ';
-    }
-  }
+  // getColorClass(color: Color) {
+  //   if (color == this.currentColor) {
+  //     return 'list-group-item cursorPointer active';
+  //   } else {
+  //     return 'list-group-item cursorPointer ';
+  //   }
+  // }
 
-  setCurrentColor(color: Color) {
-    this.currentColor = color;
-  }
+  // setCurrentColor(color: Color) {
+  //   this.currentColor = color;
+  // }
 
-  deleteCar(car: Car) {
-    let carModel: CarDelete = {
-      carId: car.carId,
-      brandId: car.brandId,
-      colorId: car.colorId,
-      modelYear: car.modelYear,
-      dailyPrice: car.dailyPrice,
-      description: car.description,
-      minFindexScore: car.minFindexScore,
-    };
-    this.carService.delete(carModel).subscribe(
-      (response) => {
-        this.toastr.success('Delete OK');
-        window.location.reload();
-      },
-      (responseError) => {
-        this.toastr.error('Error');
-      }
-    );
-  }
+  // deleteCar(car: Car) {
+  //   let carModel: CarDelete = {
+  //     carId: car.carId,
+  //     brandId: car.brandId,
+  //     colorId: car.colorId,
+  //     modelYear: car.modelYear,
+  //     dailyPrice: car.dailyPrice,
+  //     description: car.description,
+  //     minFindexScore: car.minFindexScore,
+  //   };
+  //   this.carService.delete(carModel).subscribe(
+  //     (response) => {
+  //       this.toastr.success('Delete OK');
+  //       window.location.reload();
+  //     },
+  //     (responseError) => {
+  //       this.toastr.error('Error');
+  //     }
+  //   );
+  // }
 
-  deleteBrand(brand: Brand) {
-    this.brandService.delete(brand).subscribe(
-      (response) => {
-        this.toastr.success('Delete OK');
-        window.location.reload();
-      },
-      (responseError) => {
-        this.toastr.error('Error');
-      }
-    );
-  }
+  // deleteBrand(brand: Brand) {
+  //   this.brandService.delete(brand).subscribe(
+  //     (response) => {
+  //       this.toastr.success('Delete OK');
+  //       window.location.reload();
+  //     },
+  //     (responseError) => {
+  //       this.toastr.error('Error');
+  //     }
+  //   );
+  // }
 
-  deleteColor(color: Color) {
-    this.colorService.delete(color).subscribe(
-      (response) => {
-        this.toastr.success('Delete OK');
-        window.location.reload();
-      },
-      (responseError) => {
-        this.toastr.error('Error');
-      }
-    );
-  }
+  // deleteColor(color: Color) {
+  //   this.colorService.delete(color).subscribe(
+  //     (response) => {
+  //       this.toastr.success('Delete OK');
+  //       window.location.reload();
+  //     },
+  //     (responseError) => {
+  //       this.toastr.error('Error');
+  //     }
+  //   );
+  // }
 }

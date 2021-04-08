@@ -11,24 +11,27 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CreditCardService {
 
-  apiUrl = environment.apiUrl;
-
+  apiUrl="https://localhost:44304/api/";
   constructor(private httpClient:HttpClient) { }
 
-  add(card:CreditCard):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"creditcards/add",card);
-  }
+  add(creditCard:CreditCard):Observable<ResponseModel>{
+    let newPath=this.apiUrl+"creditCards/add"
+    return this.httpClient.post<ResponseModel>(newPath,creditCard)
+   }
+   
+   delete(creditCard:CreditCard):Observable<ResponseModel>{
+    let newPath=this.apiUrl+"creditCards/delete"
+    return this.httpClient.post<ResponseModel>(newPath,creditCard)
+   }
 
-  getByCustomerId(customerId:number):Observable<ListResponseModel<CreditCard>>{
-    return this.httpClient.get<ListResponseModel<CreditCard>>(this.apiUrl+"creditcards/getbycustomer?id="+customerId);
-  }
-  
-  update(card:CreditCard):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"creditcards/update",card);
-  }
-  
-  delete(card:CreditCard):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"creditcards/delete",card);
-  }
+   update(creditCard:CreditCard):Observable<ResponseModel>{
+    let newPath=this.apiUrl+"creditCards/update"
+    return this.httpClient.post<ResponseModel>(newPath,creditCard)
+   }
 
+   getCreditCardByUserId(userId:number):Observable<ListResponseModel<CreditCard>>{
+    let newPath=this.apiUrl+"creditCards/getallbyuserid?userId="+userId
+    return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
+
+  }
 }

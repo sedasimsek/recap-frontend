@@ -1,39 +1,207 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(218, 240, 240)">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  style="background-color: honeydew; padding: 20px"
+>
   <div class="container-fluid">
-    <a class="navbar-brand p-2" style="background-color:darkseagreen; color:rgb(2, 75, 2); border-radius: 8px;" href="#">ReCap</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      class="navbar-brand"
+      href="#"
+      style="text-decoration: lightsalmon; font-family: cursive"
+      >ReCap Rental</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse m-2" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto ms-5 mb-lg-0 ">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active " aria-current="page" routerLink="/homepage">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="cars"
+            >Anasayfa</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="/list">Operations</a>
+          <a class="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            List
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/cars">Cars</a></li>
-            <li><a class="dropdown-item" routerLink="/customers">Customers</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/brands">Brands</a></li>
-            <li><a class="dropdown-item" routerLink="/colors">Colors</a></li>
-            <li><a class="dropdown-item" routerLink="/rentals">Rentals</a></li>
-          </ul>
+
+        <div *ngIf="checkAdminRole()" class="dropdown">
+          <li class="nav-item dropdown">
+            <button
+              style="background-color: yellowgreen"
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Admin Paneli
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a class="dropdown-item" routerLink="cars/add">Araç Ekle</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" routerLink="cars/color/add"
+                  >Renk Ekle</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" routerLink="cars/brand/add"
+                  >Marka Ekle</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#"></a></li>
+            </ul>
+          </li>
+        </div>
+
+        <div *ngIf="checkUserRole()" class="dropdown">
+          <li class="nav-item dropdown">
+            <button
+              style="background-color: yellowgreen"
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Kullanıcı Paneli
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a class="dropdown-item" routerLink="/account"
+                  >Bilgilerimi Güncelle</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" routerLink="/findex">Findex Puanım</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" routerLink="/rented">Kiraladıklarım</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#"></a></li>
+            </ul>
+          </li>
+        </div>
+
+        <div *ngIf="checkNotRole()"></div>
+      </ul>
+
+      <!-- <form class="d-flex">
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+       placeholder="Açıklama ara..">
+        <button class="btn btn-outline-success" type="submit" >Search</button>
+      </form> -->
+    </div>
+  </div>
+  <div *ngIf="!isAuthenticated()">
+    <form class="d-flex">
+      <button
+        style="background-color: rgb(201, 241, 119)"
+        class="btn btn-outline-success"
+        routerLink="/register"
+      >
+        Kayıt Ol
+      </button>
+      <button
+        style="background-color: rgb(201, 241, 119)"
+        class="btn btn-outline-success"
+        routerLink="/login"
+      >
+        Giriş Yap
+      </button>
+    </form>
+  </div>
+  <div *ngIf="isAuthenticated()" class="dropdown">
+    <form class="d-flex">
+      <button
+        style="background-color: yellowgreen"
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        {{ authService.firstName }} {{ authService.lastName }}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <a class="dropdown-item" routerLink="/account"
+            ><b>Hesap Bilgileri</b></a
+          >
         </li>
       </ul>
-      <form class="d-flex">
-        <div class="d-flex btn-group ps-4" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-          <label class="btn btn-outline-info" for="btnradio1">Login</label>
-          <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-          <label class="btn btn-outline-success" for="btnradio2">Register</label>
+      <!-- Button trigger modal -->
+      <button
+        style="background-color: red; width: 100px"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Çıkış Yap
+      </button>
+    </form>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Çıkış Yapmak İstediğinizden Emin Misiniz?
+            </h5>
+            <button
+              style="background-color: yellowgreen"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              style="background-color: yellowgreen"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Vazgeç
+            </button>
+            <button
+              style="background-color: red"
+              (click)="logOut()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Çıkış Yap
+            </button>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </nav>

@@ -5,43 +5,41 @@ import { BrandService } from 'src/app/services/brand.service';
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.css']
+  styleUrls: ['./brand.component.css'],
 })
 export class BrandComponent implements OnInit {
-
   brands: Brand[] = [];
   currentBrand!: Brand;
   dataLoaded = false;
-  filterText="";
+  filterText = '';
 
-  constructor(private brandService: BrandService) { }
+  constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
     this.getBrands();
   }
 
-  getBrands(){
-    this.brandService.getBrands().subscribe(response => {
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-      this.dataLoaded = true;
-    })
+      //this.dataLoaded = true;
+    });
   }
 
-  getBrandClass(brand:Brand){
-    if(brand == this.currentBrand){
-      return "list-group-item cursorPointer active"
-    }else{
-      return "list-group-item cursorPointer "
+  getCurrentBrandClass(brand: Brand) {
+    if (brand == this.currentBrand) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
     }
   }
 
-  clearFilter() {
-    this.filterText = "";
-    this.getBrands();
-  }
+  // clearFilter() {
+  //   this.filterText = "";
+  //   this.getBrands();
+  // }
 
-  setCurrentBrand(brand:Brand){
-    this.currentBrand=brand;
+  setCurrentBrand(brand: Brand) {
+    this.currentBrand = brand;
   }
-
 }

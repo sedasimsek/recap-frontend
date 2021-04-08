@@ -16,7 +16,7 @@ export class BrandAddComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,
     private brandService:BrandService,
-    private toastr:ToastrService,
+    private toastrService:ToastrService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -32,24 +32,18 @@ export class BrandAddComponent implements OnInit {
   add(){
     if(this.brandAddForm.valid)
     {
-      let brandModel:Brand = Object.assign({}, this.brandAddForm.value)
+      let brandModel = Object.assign({}, this.brandAddForm.value)
       this.brandService.add(brandModel).subscribe(response=>{
-        this.toastr.success("OK")
-        this.router.navigate(['/list']);
+        this.toastrService.success(response.message,"Başarılı")
+        //this.router.navigate(['/list']);
       },responseError=>{
         console.log(responseError.error.ValidationErrors)
-        if(responseError.error.ValidationErrors.length>0){
-          for (let i = 0; i < responseError.error.ValidationErrors.length ; i++) {
-            this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
-          }
-        }
+
       })
     }
     else{
-      this.toastr.error("Error")
+      this.toastrService.error("Form Eksik","Dikkat")
     }
 
-  }
-
-
+  }  
 }
