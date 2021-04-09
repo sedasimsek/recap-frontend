@@ -16,10 +16,10 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetails!: Car;
-  rentalsByCarId!: RentalDetail;
+  carDetails: Car;
+  rentalsByCarId: RentalDetail;
   carImages: CarImage[] = [];
-  rentals!: Rental[];
+  rentals: Rental[];
 
   constructor(
     private activatedRoute: ActivatedRoute,

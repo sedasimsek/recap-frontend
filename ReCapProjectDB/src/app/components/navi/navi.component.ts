@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-navi',
   templateUrl: './navi.component.html',
-  styleUrls: ['./navi.component.css']
+  styleUrls: ['./navi.component.css'],
 })
 export class NaviComponent implements OnInit {
-
   filterText="";
-  constructor(public authService:AuthService,
+  constructor(
+    public authService:AuthService,
     private toastrService:ToastrService,
     private localStorageService:LocalStorageService,
-    
     ) { }
 
     ngOnInit() {

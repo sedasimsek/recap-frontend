@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,8 +33,12 @@ import { CarFilterComponent } from './components/cars/car-filter/car-filter.comp
 import { JwtModule } from '@auth0/angular-jwt';
 import { CarRentComponent } from './components/cars/car-rent/car-rent.component';
 import { DescriptionPipe } from './pipes/description.pipe';
+import { FindexComponent } from './components/findex/findex.component';
+import { RentedComponent } from './components/rentals/rented/rented.component';
 
-
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +64,9 @@ import { DescriptionPipe } from './pipes/description.pipe';
     AccountComponent,
     CarFilterComponent,
     CarRentComponent,
-    DescriptionPipe
+    DescriptionPipe,
+    FindexComponent,
+    RentedComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +74,7 @@ import { DescriptionPipe } from './pipes/description.pipe';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    FormGroup,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -85,10 +92,7 @@ import { DescriptionPipe } from './pipes/description.pipe';
     useClass:AuthInterceptor,
     multi:true
   }],
-  bootstrap: [AppComponent]
-})
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+}) 
 export class AppModule { }
-
-export function tokenGetter() {
-  return localStorage.getItem("token");
-}

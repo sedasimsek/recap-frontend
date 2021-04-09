@@ -22,11 +22,11 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarUpdateComponent implements OnInit {
   carUpdateForm!: FormGroup;
-  carDetails!: Car;
+  carDetails: Car;
   brands: Brand[] = [];
   colors: Color[] = [];
-  brand!: Brand;
-  color!: Color;
+  brand: Brand;
+  color: Color;
 
   constructor(
     private formBuilder: FormBuilder,

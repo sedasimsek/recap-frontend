@@ -20,8 +20,8 @@ export class AuthService {
   roles: any[] = [];
   token: any;
   isLoggedIn: boolean = false;
-  userId!: number;
-  email!: string;
+  userId: number;
+  email: string;
   apiUrl = 'https://localhost:44304/api/auth';
 
   constructor(private httpClient: HttpClient,

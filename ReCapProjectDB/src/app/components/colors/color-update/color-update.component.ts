@@ -12,8 +12,8 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorUpdateComponent implements OnInit {
 
-  colorUpdateForm!: FormGroup;
-  color!: Color;
+  // colorUpdateForm!: FormGroup;
+  // color!: Color;
 
   constructor(private formBuilder:FormBuilder,
     private colorService:ColorService,
@@ -22,51 +22,51 @@ export class ColorUpdateComponent implements OnInit {
     private router:Router)
      {}
 
-  ngOnInit(): void {
-    this.createUpdateForm();
-    this.activatedRoute.params.subscribe(parameter=>{
-      if(parameter["colorId"]){
-        this.getColorById(parameter["colorId"]);
-      }
-    })
+   ngOnInit(): void {
+  //   this.createUpdateForm();
+  //   this.activatedRoute.params.subscribe(parameter=>{
+  //     if(parameter["colorId"]){
+  //       this.getColorById(parameter["colorId"]);
+  //     }
+  //   })
   }
 
-  getColorById(colorId:number){
-    this.colorService.getColorById(colorId).subscribe(response=>{
-      this.color=response.data;
-      this.colorUpdateForm.setValue({
-        name:this.color.colorName
-      })
-    })
-  }
+  // getColorById(colorId:number){
+  //   this.colorService.getColorById(colorId).subscribe(response=>{
+  //     this.color=response.data;
+  //     this.colorUpdateForm.setValue({
+  //       name:this.color.colorName
+  //     })
+  //   })
+  // }
 
-  createUpdateForm(){
-    this.colorUpdateForm = this.formBuilder.group({
-      name:["",Validators.required]
-    })
-  }
+  // createUpdateForm(){
+  //   this.colorUpdateForm = this.formBuilder.group({
+  //     name:["",Validators.required]
+  //   })
+  // }
 
 
-  update(){
-    if(this.colorUpdateForm.valid){
-      let color = Object.assign({},this.colorUpdateForm.value)
-      console.log(color);
-      color.colorId=this.color.colorId;
-      this.colorService.update(color).subscribe(response=>{
-        this.toastr.success("Update OK");
-        this.router.navigate(['/list']);
-      }, responseError => {
-        console.log(responseError.error.ValidationErrors)
-        if (responseError.error.ValidationErrors.length > 0) {
-          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-            this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
-          }
-        }
-      });
-    }else{
-      this.toastr.error("Update Error")
-    }
-  }
+  // update(){
+  //   if(this.colorUpdateForm.valid){
+  //     let color = Object.assign({},this.colorUpdateForm.value)
+  //     console.log(color);
+  //     color.colorId=this.color.colorId;
+  //     this.colorService.update(color).subscribe(response=>{
+  //       this.toastr.success("Update OK");
+  //       this.router.navigate(['/list']);
+  //     }, responseError => {
+  //       console.log(responseError.error.ValidationErrors)
+  //       if (responseError.error.ValidationErrors.length > 0) {
+  //         for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+  //           this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
+  //         }
+  //       }
+  //     });
+  //   }else{
+  //     this.toastr.error("Update Error")
+  //   }
+  // }
 
 
 }

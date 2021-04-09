@@ -23,14 +23,13 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class CarRentComponent implements OnInit {
   findexScore: Findex[] = [];
-  cars: Car[] = [];
-  carDetails!: any;
-  customers!: Customer;
-  customerId!: number;
-  rentDate!: Date;
+  cars: Car[] = []
+  customers: Customer;
+  customerId: number;
+  rentDate: Date;
   returnDate!: Date;
-  rentDateValue!: Date;
-  rentalCar!: RentalDetail;
+  rentDateValue: Date;
+  rentalCar: RentalDetail;
   isRentBefore: Boolean = false;
 
   constructor(
@@ -67,9 +66,7 @@ export class CarRentComponent implements OnInit {
   }
 
   checkFindex() {
-    if (
-      this.carDetails[0]?.minFindexScore <= this.findexScore[0]?.findexScore
-    ) {
+    if ((this.cars[0]?.minFindexScore) <= (this.findexScore[0]?.findexScore)) {
       return true;
     } else {
       return false;

@@ -12,8 +12,8 @@ import { ColorService } from 'src/app/services/color.service';
 export class CarFilterComponent implements OnInit {
   colors: Color[] = [];
   brands: Brand[] = [];
-  brandIdFilter!: number;
-  colorIdFilter!: number;
+  brandIdFilter: number;
+  colorIdFilter: number;
   constructor( 
     private brandService:BrandService,
     private colorService:ColorService

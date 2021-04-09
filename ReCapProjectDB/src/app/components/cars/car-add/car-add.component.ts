@@ -14,9 +14,9 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./car-add.component.css'],
 })
 export class CarAddComponent implements OnInit {
-  carAddForm!: FormGroup;
-  brands!: Brand[];
-  colors!: Color[];
+  carAddForm: FormGroup;
+  brands: Brand[];
+  colors: Color[];
 
   constructor(
     private formBuilder: FormBuilder,
