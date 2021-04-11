@@ -47,10 +47,10 @@ export class AdminGuard implements CanActivate {
       }
     } else if (!this.token) {
       this.router.navigate(['/']);
-      this.toastrService.error('Önce Admin Olarak Giriş Yapmalısınız');
+      this.toastrService.error('Admin Olarak Giriş Yapmalısınız');
       return false;
     }
-    this.toastrService.error('Önce Admin Olarak Giriş Yapmalısınız');
+    this.toastrService.error('Admin Olarak Giriş Yapmalısınız');
     return false;
   }
 }

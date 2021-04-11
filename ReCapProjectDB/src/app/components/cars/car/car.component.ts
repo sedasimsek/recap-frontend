@@ -8,6 +8,7 @@ import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { CarImage } from 'src/app/models/carImage';
 
 @Component({
   selector: 'app-car',

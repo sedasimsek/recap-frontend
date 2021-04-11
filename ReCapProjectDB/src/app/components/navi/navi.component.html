@@ -34,7 +34,7 @@
         <div *ngIf="checkAdminRole()" class="dropdown">
           <li class="nav-item dropdown">
             <button
-              style="background-color: yellowgreen"
+              style="background-color: #f7bb4d"
               class="btn btn-secondary dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
@@ -69,7 +69,7 @@
         <div *ngIf="checkUserRole()" class="dropdown">
           <li class="nav-item dropdown">
             <button
-              style="background-color: yellowgreen"
+              style="background-color: #f7bb4d"
               class="btn btn-secondary dropdown-toggle"
               type="button"
               id="dropdownMenuButton1"
@@ -112,14 +112,14 @@
   <div *ngIf="!isAuthenticated()">
     <form class="d-flex">
       <button
-        style="background-color: rgb(201, 241, 119)"
+        style="background-color: #f7bb4d"
         class="btn btn-outline-success"
         routerLink="/register"
       >
         Kayıt Ol
       </button>
       <button
-        style="background-color: rgb(201, 241, 119)"
+        style="background-color: #f7bb4d"
         class="btn btn-outline-success"
         routerLink="/login"
       >
@@ -130,7 +130,7 @@
   <div *ngIf="isAuthenticated()" class="dropdown">
     <form class="d-flex">
       <button
-        style="background-color: yellowgreen"
+        style="background-color: #f7bb4d"
         class="btn btn-secondary dropdown-toggle"
         type="button"
         id="dropdownMenuButton1"
@@ -173,7 +173,7 @@
               Çıkış Yapmak İstediğinizden Emin Misiniz?
             </h5>
             <button
-              style="background-color: yellowgreen"
+              style="background-color: rgb(104, 202, 181)"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -183,7 +183,7 @@
 
           <div class="modal-footer">
             <button
-              style="background-color: yellowgreen"
+              style="background-color:rgb(104, 202, 181)"
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
@@ -191,7 +191,7 @@
               Vazgeç
             </button>
             <button
-              style="background-color: red"
+              style="background-color: rgb(74, 60, 134)"
               (click)="logOut()"
               type="button"
               class="btn btn-primary"

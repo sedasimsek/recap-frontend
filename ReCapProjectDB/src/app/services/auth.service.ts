@@ -1,19 +1,22 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
+import { LoginComponent } from '../components/login/login.component';
 import { LoginModel } from '../models/loginModel';
 import { RegisterModel } from '../models/registerModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
-import { UserModel } from '../models/userModel';
+import {  JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
+import { UserModel } from '../models/userModel';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
+
+  apiUrl="https://localhost:44304/api/auth"
   firstName: string = "";
   lastName:string="";
   role:any;
@@ -21,45 +24,37 @@ export class AuthService {
   token: any;
   isLoggedIn: boolean = false;
   userId: number;
-  email: string;
-  apiUrl = 'https://localhost:44304/api/auth';
+  email:string;
 
-  constructor(private httpClient: HttpClient,
-    private localStorageService:LocalStorageService,
+  constructor(private httpClient:HttpClient,
     private router: Router,
-    private jwtHelper: JwtHelperService) {}
+    private localStorageService:LocalStorageService,
+    private jwtHelper: JwtHelperService ) { }
 
-  login(loginModel: LoginModel) {
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(
-      this.apiUrl + 'login',
-      loginModel
-    );
+  login(loginModel:LoginModel): Observable<SingleResponseModel<TokenModel>> {
+    let newPath=this.apiUrl+"/login";
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,loginModel)
+   
+
   }
 
-  register(
-    registerModel: RegisterModel
-  ): Observable<SingleResponseModel<RegisterModel>> {
-    let newPath = this.apiUrl + '/register';
-    return this.httpClient.post<SingleResponseModel<RegisterModel>>(
-      newPath,
-      registerModel
-    );
+  register(registerModel:RegisterModel): Observable<SingleResponseModel<RegisterModel>> {
+    let newPath=this.apiUrl+"/register";
+    return this.httpClient.post<SingleResponseModel<RegisterModel>>(newPath,registerModel)
   }
 
-  isAuthenticated() {
-    if (localStorage.getItem('token')) {
-      return true;
-    } else {
+  update(userModel:UserModel): Observable<SingleResponseModel<UserModel>> {
+    let newPath=this.apiUrl+"/update";
+    return this.httpClient.post<SingleResponseModel<UserModel>>(newPath,userModel)
+  }
+
+  isAuthenticated(){
+    if(this.localStorageService.getItem("token")){
+      return true
+    }
+    else{
       return false;
     }
-  }
-
-  update(userModel: UserModel): Observable<SingleResponseModel<UserModel>> {
-    let newPath = this.apiUrl + '/update';
-    return this.httpClient.post<SingleResponseModel<UserModel>>(
-      newPath,
-      userModel
-    );
   }
 
   userDetailFromToken(){
@@ -105,4 +100,6 @@ export class AuthService {
       this.router.navigate([this.router.url])
     })
   }
+ 
+
 }

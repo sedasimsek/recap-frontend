@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,17 +15,12 @@ import { NaviComponent } from './components/navi/navi.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CustomerComponent } from './components/customer/customer.component';
 import { BrandAddComponent } from './components/brands/brand-add/brand-add.component';
-import { BrandUpdateComponent } from './components/brands/brand-update/brand-update.component';
 import { CarAddComponent } from './components/cars/car-add/car-add.component';
 import { CarUpdateComponent } from './components/cars/car-update/car-update.component';
 import { CarDetailComponent } from './components/cars/car-detail/car-detail.component';
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
-import { ListComponent } from './components/list/list.component';
-import { BrandListComponent } from './components/brands/brand-list/brand-list.component';
-import { ColorListComponent } from './components/colors/color-list/color-list.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
 import { AccountComponent } from './components/account/account.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { FooterComponent } from './components/footer/footer.component';
@@ -49,19 +44,14 @@ export function tokenGetter() {
     NaviComponent,
     CustomerComponent,
     BrandAddComponent,
-    BrandUpdateComponent,
     CarAddComponent,
     CarUpdateComponent,
     CarDetailComponent,
     FilterBrandPipe,
     FilterColorPipe,
     VatAddedPipe,
-    ListComponent,
     FooterComponent,
     LoginComponent,
-    BrandListComponent,
-    ColorListComponent,
-    HomepageComponent,
     AccountComponent,
     CarFilterComponent,
     CarRentComponent,

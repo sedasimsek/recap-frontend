@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
@@ -16,7 +16,6 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
 import { FindexService } from 'src/app/services/findex.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment',
@@ -25,6 +24,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PaymentComponent implements OnInit {
   creditCardForm:FormGroup;
+  
   creditCards:CreditCard[]=[]
   findexScore: Findex[] = []
   cartItems: CartItem[] = [];
@@ -46,8 +46,6 @@ export class PaymentComponent implements OnInit {
     public authService:AuthService,
     private activatedRoute:ActivatedRoute,
     private findexService:FindexService
-   
-    
   ) { }
 
   ngOnInit(): void {
