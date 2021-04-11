@@ -1,4 +1,4 @@
-<!-- <div class="card mt-4">
+<div class="card mt-4">
   <div class="card-body">
     <table class="table">
       <thead>
@@ -20,9 +20,9 @@
           <td>{{ car.modelYear }}</td>
           <td>{{ rental.rentDate }}</td>
           <td>{{ rental.returnDate }}</td>
-          <td>{{ car.dailyPrice | vatAdded: 8 | currency }}</td>
+          <td>{{ car.dailyPrice | vatAdded: 8 }}</td>
           <td>
-            <strong class="text-danger">{{ amount | currency }}</strong>
+            <strong class="text-danger">{{ amount }}</strong>
           </td>
         </tr>
       </tbody>
@@ -84,8 +84,8 @@
           alt="No IMG"
           style="width: 40px"
         />
-        <strong>{{ amount | currency }} PAY </strong>
+        <strong>{{ amount }} PAY </strong>
       </button>
     </div>
   </div>
-</div> -->
+</div>

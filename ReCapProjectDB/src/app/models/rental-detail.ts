@@ -6,6 +6,9 @@ export interface RentalDetail {
     brandName:string;
     colorName: string;
     companyName: string;
+    carDescription?:string;
+    carModel?:number;
+    carBrand?:string;
     rentDate: Date;
     returnDate: Date;
   }
