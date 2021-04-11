@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './components/account/account.component';
 import { BrandAddComponent } from './components/brands/brand-add/brand-add.component';
 import { CarAddComponent } from './components/cars/car-add/car-add.component';
-import { ColorAddComponent } from './components/colors/color-add/color-add.component';
 import { CarDetailComponent } from './components/cars/car-detail/car-detail.component';
 import { CarComponent } from './components/cars/car/car.component';
 import { FindexComponent } from './components/findex/findex.component';
@@ -26,7 +25,6 @@ const routes: Routes = [
   {path:"cars/filter/:brandId/:colorId",component:CarComponent},
   {path:"cars/rentacar/:id",component:CarRentComponent, canActivate:[LoginGuard]},
   {path:"cars/brand/add", component:BrandAddComponent},
-  {path:"cars/color/add", component:ColorAddComponent},
   {path:"cars/add", component:CarAddComponent, canActivate:[AdminGuard]},
   {path:"cars/update/:id", component:CarUpdateComponent,canActivate:[AdminGuard]},
   {path:"login", component:LoginComponent},

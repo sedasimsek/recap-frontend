@@ -31,6 +31,8 @@ import { CarRentComponent } from './components/cars/car-rent/car-rent.component'
 import { DescriptionPipe } from './pipes/description.pipe';
 import { FindexComponent } from './components/findex/findex.component';
 import { RentedComponent } from './components/rentals/rented/rented.component';
+import { RegisterComponent} from './components/register/register.component';
+import { ColorAddComponent } from './components/colors/color-add/color-add.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -49,6 +51,7 @@ export function tokenGetter() {
     CarDetailComponent,
     FilterBrandPipe,
     FilterColorPipe,
+    RegisterComponent,
     VatAddedPipe,
     FooterComponent,
     LoginComponent,
@@ -58,6 +61,7 @@ export function tokenGetter() {
     DescriptionPipe,
     FindexComponent,
     RentedComponent,
+    ColorAddComponent,
   ],
   imports: [
     BrowserModule,
