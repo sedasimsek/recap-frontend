@@ -1,6 +1,6 @@
 # ReCap Rental Platform
 
-/*This project is an online car rental project.*/
+*This project is an online car rental project.*
 
 * Tecnologies
  Angular 11
