@@ -1,19 +1,19 @@
 # ReCap Rental Platform
 
-/*This project is an online car rental project.
+/*This project is an online car rental project.*/
 
 * Tecnologies
-- Angular 11
-- TypeScript
-- Primeng
-- Angular/cdk
+ Angular 11
+TypeScript
+Primeng
+Angular/cdk
 
 * FrontendTechniques
-- Pipe
-- JWT
-- Service
-- ToastrService
-- Fontawesome
+Pipe
+JWT
+Service
+ToastrService
+Fontawesome
 
 * Images
 
