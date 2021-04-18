@@ -1,4 +1,4 @@
-# ReCap Rental Platform
+# ReCap Rental Platform - Frontend
 
 **This project is an online car rental project.**
 
